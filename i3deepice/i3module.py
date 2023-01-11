@@ -329,7 +329,7 @@ def print_info(phy_frame, save_as='TUM_dnn_classification'):
         if key in phy_frame.keys():
             print('Prediction ({}) :\n{}'.format(key, phy_frame[key]))
         else:
-            print('Key {} does not exist in frame'.format(key_all))
+            print('Key {} does not exist in frame'.format(key))
     print('\n')
     return
 
