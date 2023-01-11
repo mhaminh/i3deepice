@@ -148,7 +148,7 @@ class DeepLearningModule(icetray.I3ConditionalModule):
                                           log_device_placement=False)
         config.gpu_options.allow_growth = True
         self.sess = tf.compat.v1.Session(config=config)
-        self.graph = tf.get_default_graph()
+        self.graph = tf.compat.v1.get_default_graph()
         tf.compat.v1.keras.backend.set_session(self.sess)
         self.__model.load_weights(os.path.join(dirname, 'models/{}/weights.npy'.format(self.GetParameter("model"))))
         return
