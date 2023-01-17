@@ -148,8 +148,8 @@ class DeepLearningModule(icetray.I3ConditionalModule):
         self.__output_names = func_model_def.output_names
 
         if  (old_style): 
-        self.__model = func_model_def.model(self.__inp_shapes,
-                                            self.__out_shapes)
+            self.__model = func_model_def.model(self.__inp_shapes,
+                                                self.__out_shapes)
         else:
             self.__model = tf.keras.models.load_model(os.path.join(dirname,
                                                                    'models/{}/weights.h5'.format(self.GetParameter("model"))))
@@ -164,7 +164,7 @@ class DeepLearningModule(icetray.I3ConditionalModule):
         self.graph = tf.compat.v1.get_default_graph()
         tf.compat.v1.keras.backend.set_session(self.sess)
         if old_style:
-        self.__model.load_weights(os.path.join(dirname, 'models/{}/weights.npy'.format(self.GetParameter("model"))))
+            self.__model.load_weights(os.path.join(dirname, 'models/{}/weights.npy'.format(self.GetParameter("model"))))
 
         return
 
