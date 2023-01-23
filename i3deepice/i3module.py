@@ -147,12 +147,8 @@ class DeepLearningModule(icetray.I3ConditionalModule):
             func_model_def = importlib.import_module('i3deepice.models.{}.model'.format(self.GetParameter("model")))
         self.__output_names = func_model_def.output_names
 
-        if  (old_style): 
-            self.__model = func_model_def.model(self.__inp_shapes,
-                                                self.__out_shapes)
-        else:
-            self.__model = tf.keras.models.load_model(os.path.join(dirname,
-                                                                   'models/{}/weights.h5'.format(self.GetParameter("model"))))
+        self.__model = func_model_def.model(self.__inp_shapes,
+                                            self.__out_shapes)
         config = tf.compat.v1.ConfigProto(intra_op_parallelism_threads=self.__cpu_cores,
                                           inter_op_parallelism_threads=self.__cpu_cores,
                                           device_count={'GPU': self.__gpu_cores ,
@@ -165,6 +161,8 @@ class DeepLearningModule(icetray.I3ConditionalModule):
         tf.compat.v1.keras.backend.set_session(self.sess)
         if old_style:
             self.__model.load_weights(os.path.join(dirname, 'models/{}/weights.npy'.format(self.GetParameter("model"))))
+        else:
+            self.__model.load_weights(os.path.join(dirname, 'models/{}/weights.h5'.format(self.GetParameter("model"))))
 
         return
 
